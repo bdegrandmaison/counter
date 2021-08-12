@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Button from "./components/Button";
+import "./App.css";
 
 function App() {
+  const initialState = { count: 0 };
+  const [state, setState] = useState(initialState);
+
+  function add() {
+    setState({ count: state.count + 1 });
+  }
+
+  function substract() {
+    setState({ count: state.count - 1 });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{state.count}</p>
+      <Button text="-" onClick={substract} />
+      <Button text="+" onClick={add} />
     </div>
   );
 }
