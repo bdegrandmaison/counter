@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 
 describe("The application", () => {
+  
   it("renders the counter at its initial state(0)", () => {
     render(<App />);
     const counterElement = screen.getByText("0");

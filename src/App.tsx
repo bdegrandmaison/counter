@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import RenderCount from "./components/RenderCount";
 import "./App.css";
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <p>{state.count}</p>
+      <RenderCount count={state.count} />
       <Button text="-" onClick={substract} />
       <Button text="+" onClick={add} />
     </div>
