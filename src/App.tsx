@@ -1,25 +1,16 @@
-import { useState } from "react";
 import Button from "./components/Button";
 import RenderCount from "./components/RenderCount";
 import "./App.css";
+import { useCounter } from "./hooks/useCounter.hook";
 
 function App() {
-  const initialState = { count: 0 };
-  const [state, setState] = useState(initialState);
-
-  function add() {
-    setState({ count: state.count + 1 });
-  }
-
-  function substract() {
-    setState({ count: state.count - 1 });
-  }
+  const { count, decrement, increment } = useCounter(0);
 
   return (
     <div className="App">
-      <RenderCount count={state.count} />
-      <Button text="-" onClick={substract} />
-      <Button text="+" onClick={add} />
+      <RenderCount count={count} />
+      <Button text="-" onClick={decrement} />
+      <Button text="+" onClick={increment} />
     </div>
   );
 }

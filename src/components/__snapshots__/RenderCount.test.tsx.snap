@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Count display component should render the value 10 given in the count prop "10" 1`] = `
+<div>
+  <p>
+    10
+  </p>
+</div>
+`;
+
+exports[`Count display component should render the value 20 given in the count prop "20" 1`] = `
+<div>
+  <p>
+    20
+  </p>
+</div>
+`;
+
+exports[`Count display component should render the value 30 given in the count prop "30" 1`] = `
+<div>
+  <p>
+    30
+  </p>
+</div>
+`;
+
+exports[`Count display component should render the value 40 given in the count prop "40" 1`] = `
+<div>
+  <p>
+    40
+  </p>
+</div>
+`;
