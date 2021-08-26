@@ -28,9 +28,10 @@ describe("The application", () => {
     expect(screen.getByText("1")).toBeInTheDocument();
   });
 
-  it("changes the counter value to -1 when the + button is pressed", () => {
+  it("changes the counter value to -1 when the - button is pressed", () => {
     render(<App />);
     const minusButton = screen.getByRole("button", { name: "-" });
+    
     fireEvent.click(minusButton);
     expect(screen.getByText("-1")).toBeInTheDocument();
   });
