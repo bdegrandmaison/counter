@@ -3,17 +3,18 @@ import { act, renderHook } from "@testing-library/react-hooks";
 
 jest.mock("./useCounter.hook", () => ({
   __esModule: true,
-  default: jest.fn(),
-  state: { count: 0 },
-  increment: jest.fn() as jest.Mock,
-  decrement: () => jest.fn() as jest.Mock,
+  useCounter: (num: number) => ({
+    state: { count: 0 },
+    increment: jest.fn(),
+    decrement: jest.fn(),
+  }),
 }));
 
 describe("The hook", () => {
   const { result } = renderHook(() => useCounter(0));
 
   const increment = result.current.increment as jest.Mock;
-  const decrement = result.current.increment as jest.Mock;
+  const decrement = result.current.decrement as jest.Mock;
 
   beforeEach(() => {
     increment.mockImplementation(() => () => {});
@@ -31,7 +32,7 @@ describe("The hook", () => {
     });
 
     expect(increment).toHaveBeenCalledTimes(1);
-    expect(decrement).toHaveBeenCalledTimes(1);
+    expect(increment).toHaveBeenCalledWith();
   });
 
   it("should call the decrement function once", () => {
