@@ -1,24 +1,45 @@
 import { useCounter } from "./useCounter.hook";
 import { act, renderHook } from "@testing-library/react-hooks";
 
+jest.mock("./useCounter.hook", () => ({
+  __esModule: true,
+  default: jest.fn(),
+  state: { count: 0 },
+  increment: jest.fn() as jest.Mock,
+  decrement: () => jest.fn() as jest.Mock,
+}));
+
 describe("The hook", () => {
-  it("should increment the counter so that its value is 1", () => {
-    const { result } = renderHook(() => useCounter(0));
+  const { result } = renderHook(() => useCounter(0));
 
-    act(() => {
-      result.current.increment();
-    });
+  const increment = result.current.increment as jest.Mock;
+  const decrement = result.current.increment as jest.Mock;
 
-    expect(result.current.state.count).toBe(1);
+  beforeEach(() => {
+    increment.mockImplementation(() => () => {});
+    decrement.mockImplementation(() => () => {});
   });
 
-  it("should decrement the counter so that its value is -1", () => {
-    const { result } = renderHook(() => useCounter(0));
+  afterEach(() => {
+    increment.mockClear();
+    decrement.mockClear();
+  });
 
+  it("should call the increment function once", () => {
     act(() => {
-      result.current.decrement();
+      increment();
     });
 
-    expect(result.current.state.count).toBe(-1);
+    expect(increment).toHaveBeenCalledTimes(1);
+    expect(decrement).toHaveBeenCalledTimes(1);
+  });
+
+  it("should call the decrement function once", () => {
+    act(() => {
+      decrement();
+    });
+
+    expect(decrement).toHaveBeenCalledTimes(1);
+    expect(decrement).toHaveBeenCalledWith();
   });
 });
