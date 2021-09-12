@@ -4,11 +4,11 @@ import "./App.css";
 import { useCounter } from "./hooks/useCounter.hook";
 
 function App() {
-  const { count, decrement, increment } = useCounter(0);
+  const { state, decrement, increment } = useCounter(0);
 
   return (
     <div className="App">
-      <RenderCount count={count} />
+      <RenderCount count={state.count} />
       <Button text="-" onClick={decrement} />
       <Button text="+" onClick={increment} />
     </div>

@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useReducer } from "react";
 
-interface UseCounter {
+interface State {
   count: number;
-  increment: () => void;
-  decrement: () => void;
 }
 
-export function useCounter(): UseCounter {
-  const [count, setCount] = useState(0);
+interface ActionType {
+  type: "INCREMENT" | "DECREMENT";
+}
+
+function reducer(state: State, action: ActionType) {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 };
+    case "DECREMENT":
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+export function useCounter(initialState: number) {
+  const [state, dispatch] = useReducer(reducer, { count: initialState });
 
   return {
-    count,
-    increment: () => setCount((count) => count + 1),
-    decrement: () => setCount((count) => count - 1),
+    state,
+    increment: () => dispatch({ type: "INCREMENT" }),
+    decrement: () => dispatch({ type: "DECREMENT" }),
   };
 }

@@ -1,7 +1,7 @@
 type RenderCountProp = {
-    count: number
-}
+  count: number;
+};
 
-export default function RenderCount( {count}: RenderCountProp) {
-    return <p>{count}</p>
+export default function RenderCount(state: RenderCountProp) {
+  return <p>{state.count}</p>;
 }
